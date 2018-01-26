@@ -1,6 +1,6 @@
 # Concourse
 
-This is the compilation of proposed (docker-compose solution)[https://concourse.ci/docker-repository.html] and my own experience.
+This is the compilation of proposed [docker-compose solution](https://concourse.ci/docker-repository.html) and my own experience.
 
 ### Prerequisites
 
