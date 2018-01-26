@@ -13,9 +13,9 @@ This is the compilation of proposed [docker-compose solution](https://concourse.
 ### How to start
 
 1. `certs.sh`
-1. `scripts\create-machine.sh`
+1. `scripts/create-machine.sh`
 1. change `ENV_CONCOURSE_URL` variable as suggested after step 1
-1. `scripts\create-network.sh`
+1. `scripts/create-network.sh`
 1. `scripts/up-compose.sh docker-compose.yml`
 
 ### How to login
@@ -41,6 +41,6 @@ scripts/kill-machine.sh
 ```
 
 Additional scripts
-1. `prune.sh` - clean up docker internals inside docker machine, like `scripts\prune.sh`
-1. `cmd.sh` - execute command in docker machine context, like `scripts\cmd.sh docker ps`
+1. `prune.sh` - clean up docker internals inside docker machine, like `scripts/prune.sh`
+1. `cmd.sh` - execute command in docker machine context, like `scripts/cmd.sh docker ps`
 1. `compose.sh` - roll docker compose configuration
