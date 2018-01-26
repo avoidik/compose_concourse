@@ -10,7 +10,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -le 0 ]; then
     echo "Illegal number of parameters. Pass compose file"
     exit
 fi
