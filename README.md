@@ -43,4 +43,4 @@ scripts/kill-machine.sh
 Additional scripts
 1. `prune.sh` - clean up docker internals inside docker machine, like `scripts/prune.sh`
 1. `cmd.sh` - execute command in docker machine context, like `scripts/cmd.sh docker ps`
-1. `compose.sh` - roll docker compose configuration
+1. `compose.sh` - execute docker compose command in docker machine context
