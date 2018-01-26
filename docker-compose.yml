@@ -8,6 +8,10 @@ networks:
 volumes:
   concourse-db-volume:
     driver: "${ENV_VOLUME_DRIVER}"
+  concourse-web-volume:
+    driver: "${ENV_VOLUME_DRIVER}"
+  concourse-worker-volume:
+    driver: "${ENV_VOLUME_DRIVER}"
 
 services:
   concourse-db:
@@ -35,6 +39,7 @@ services:
       - "8080:8080"
     volumes:
       - "./keys/web:/concourse-keys"
+      - "concourse-web-volume:/worker-state"
     environment:
       CONCOURSE_BASIC_AUTH_USERNAME: "${ENV_CONCOURSE_USER}"
       CONCOURSE_BASIC_AUTH_PASSWORD: "${ENV_CONCOURSE_PASSWORD}"
@@ -56,6 +61,7 @@ services:
       - worker
     volumes:
       - "./keys/worker:/concourse-keys"
+      - "concourse-worker-volume:/worker-state"
     environment:
       CONCOURSE_TSA_HOST: concourse-web
     networks:
