@@ -14,7 +14,7 @@ This is the compilation of proposed [docker-compose solution](https://concourse.
 
 1. `certs.sh`
 1. `scripts/create-machine.sh`
-1. change `ENV_CONCOURSE_URL` variable as suggested after step 1
+1. change `ENV_CONCOURSE_URL` variable as suggested in previous step (check console output)
 1. `scripts/create-network.sh`
 1. `scripts/up-compose.sh docker-compose.yml`
 
