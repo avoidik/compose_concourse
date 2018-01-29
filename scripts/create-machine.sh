@@ -10,7 +10,7 @@ if [[ ! -f "./env.config" ]]; then
   exit
 fi
 
-if [[ ! -f "./keys/web/authorized_worker_keys" ]] || [[ ! -f "./keys/worker" ]]; then
+if [[ ! -f "./keys/web/tsa_host_key" ]] || [[ ! -f "./keys/worker/worker_key" ]]; then
   echo "Certificates were not found. Please generate them with scripts/certs.sh before"
   exit
 fi
