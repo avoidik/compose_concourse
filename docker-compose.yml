@@ -26,6 +26,8 @@ services:
       - concourse-db-volume:/database
     networks:
       - concourse
+    logging:
+      driver: "${ENV_LOGGING_DRIVER}"
 
   concourse-web:
     container_name: web
@@ -50,6 +52,8 @@ services:
       CONCOURSE_POSTGRES_DATABASE: "${ENV_PG_DATABASE}"
     networks:
       - concourse
+    logging:
+      driver: "${ENV_LOGGING_DRIVER}"
 
   concourse-worker:
     container_name: worker
@@ -66,3 +70,5 @@ services:
       CONCOURSE_TSA_HOST: concourse-web
     networks:
       - concourse
+    logging:
+      driver: "${ENV_LOGGING_DRIVER}"

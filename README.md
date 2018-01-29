@@ -12,7 +12,7 @@ This is the compilation of proposed [docker-compose solution](https://concourse.
 
 ### How to start
 
-1. `certs.sh`
+1. `scripts/certs.sh`
 1. `scripts/create-machine.sh`
 1. change `ENV_CONCOURSE_URL` variable as suggested in previous step (check console output)
 1. `scripts/create-network.sh`

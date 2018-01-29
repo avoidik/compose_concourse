@@ -6,8 +6,13 @@ if ! [ -x "$(command -v docker-machine)" ]; then
 fi
 
 if [[ ! -f "./env.config" ]]; then
-    echo "Config file not found. Run this script from project root folder"
-    exit
+  echo "Config file not found. Run this script from project root folder"
+  exit
+fi
+
+if [[ ! -f "./keys/web/authorized_worker_keys" ]] || [[ ! -f "./keys/worker" ]]; then
+  echo "Certificates were not found. Please generate them with scripts/certs.sh before"
+  exit
 fi
 
 source ./env.config
