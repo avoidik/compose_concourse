@@ -44,3 +44,9 @@ Additional scripts
 1. `prune.sh` - clean up docker internals inside docker machine, like `scripts/prune.sh`
 1. `cmd.sh` - execute command in docker machine context, like `scripts/cmd.sh docker ps`
 1. `compose.sh` - execute docker compose command in docker machine context, like `scripts/compose.sh ps`
+
+### Debug
+
+```
+winpty docker run --name=worker --user=root --rm -e CONCOURSE_TSA_HOST=web -e CONCOURSE_WORK_DIR=/opt/concourse/worker --network=concourse --privileged -v "//c/Projects/compose_concourse/keys:/concourse-keys" --entrypoint //bin/bash -it concourse/concourse
+```

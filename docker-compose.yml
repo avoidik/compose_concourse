@@ -15,7 +15,6 @@ volumes:
 
 services:
   concourse-db:
-    container_name: db
     image: postgres:${ENV_PG_VER}
     environment:
       POSTGRES_DB: "${ENV_PG_DATABASE}"
@@ -30,7 +29,6 @@ services:
       driver: "${ENV_LOGGING_DRIVER}"
 
   concourse-web:
-    container_name: web
     image: concourse/concourse
     restart: unless-stopped # required so that it retries until concourse-db comes up
     command:
@@ -56,11 +54,18 @@ services:
       driver: "${ENV_LOGGING_DRIVER}"
 
   concourse-worker:
-    container_name: worker
     image: concourse/concourse
     privileged: true
     depends_on:
       - concourse-web
+#    entrypoint:
+#      - /bin/sh
+#      - -c
+#    command:
+#      - |
+#        apt-get update
+#        apt-get -y install module-init-tools
+#        /usr/local/bin/dumb-init /usr/local/bin/concourse worker > /log 2>&1
     command:
       - worker
     volumes:
