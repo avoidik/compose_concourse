@@ -1,0 +1,48 @@
+version: '3'
+
+networks:
+  concourse:
+    external:
+      name: "${ENV_NETWORK}"
+
+volumes:
+  consul-volume:
+    driver: "${ENV_VOLUME_DRIVER}"
+
+services:
+  vault:
+    container_name: "vault"
+    image: vault
+    restart: unless-stopped # required so that it retries until concourse-db comes up
+    ports:
+      - "8200:8200"
+    command:
+      - /bin/sh
+      - -ec
+      - docker-entrypoint.sh vault server -config=/vault/config
+    depends_on:
+      - consul
+    volumes:
+      - ./config_vault:/vault/config
+    networks:
+      - concourse
+    cap_add:
+      - IPC_LOCK
+
+  consul:
+    container_name: "consul"
+    image: consul
+    restart: unless-stopped # required so that it retries until concourse-db comes up
+    ports:
+      - "8500:8500"
+    environment:
+      - CONSUL_UI_BETA=true
+    command:
+      - /bin/sh
+      - -ec
+      - docker-entrypoint.sh consul agent -config-dir=/consul/config
+    volumes:
+      - consul-volume:/consul/data
+      - ./config_consul:/consul/config
+    networks:
+      - concourse

@@ -1,0 +1,20 @@
+{
+    "storage": {
+        "consul": {
+            "address": "consul:8500",
+            "scheme": "http",
+            "path": "vault",
+            "disable_registration": "false"
+        }
+    },
+    "listener": [
+        {
+            "tcp": {
+                "address": "0.0.0.0:8200",
+                "tls_disable": "true"
+            }
+        }
+    ],
+    "disable_mlock": "true",
+	"ui": "true"
+}
