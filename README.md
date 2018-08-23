@@ -61,7 +61,7 @@ export VAULT_ADDR="http://$(docker-machine ip concourse):8200"
 export VAULT_TOKEN="..."
 
 vault policy write concourse policy/concourse.hcl
-vault token create -policy=concourse -period=10m -id=concourse-token
+vault token create -policy=concourse -period=1h -id=concourse-token
 ```
 
 Cleanup
@@ -83,7 +83,7 @@ vault kv put concourse/main/helloworld/password value=bar
 Login
 
 ```
-fly --target tutorial login --concourse-url http://<url>:8080
+fly --target tutorial login --concourse-url http://$(docker-machine ip concourse):8080
 fly --target tutorial sync
 ```
 
