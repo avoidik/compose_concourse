@@ -9,7 +9,7 @@ Spin up standalone Concourse CI environment in Docker. Optionally with Vault sec
 - docker-machine binary (with boot2docker iso)
 - docker-compose binary
 - docker binary
-- vault binary
+- vault binary (optionally)
 
 ## Quickstart
 
@@ -35,7 +35,7 @@ Credentials are set in `env.config` during spin-up, user/user by default.
 
 Soft way
 
-```
+```bash
 scripts/prune.sh
 scripts/down-compose.sh docker-compose.yml -v --remove-orphans --rmi all
 scripts/kill-machine.sh
@@ -43,7 +43,7 @@ scripts/kill-machine.sh
 
 Hard way
 
-```
+```bash
 scripts/kill-machine.sh
 ```
 
