@@ -1,0 +1,21 @@
+---
+jobs:
+- name: hello-world
+  plan:
+  - task: say-hello
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: alpine
+      params:
+        SYS_USERNAME: "root"
+        SYS_PASSWORD: "password"
+      run:
+        path: sh
+        args:
+        - -ec
+        - |
+          echo $SYS_USERNAME
+          echo $SYS_PASSWORD

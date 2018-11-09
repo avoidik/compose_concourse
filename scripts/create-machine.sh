@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+BOOT_URL="https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso"
+
 if ! [ -x "$(command -v docker-machine)" ]; then
   echo 'Error: docker-machine is not installed.' >&2
   exit 1
@@ -23,7 +25,7 @@ if [[ -n "${IS_RUN}" ]]; then
   exit
 fi
 
-docker-machine create -d "virtualbox" "${ENV_NAME}"
+docker-machine create --driver "virtualbox" --virtualbox-boot2docker-url "$BOOT_URL" "${ENV_NAME}"
 MACHINE_IP=$(docker-machine ip "${ENV_NAME}")
 
 echo ""

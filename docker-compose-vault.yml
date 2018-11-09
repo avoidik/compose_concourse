@@ -12,7 +12,7 @@ volumes:
 services:
   vault:
     container_name: "vault"
-    image: vault
+    image: vault:$VAULT_VERSION
     restart: unless-stopped # required so that it retries until concourse-db comes up
     ports:
       - "8200:8200"
@@ -31,12 +31,10 @@ services:
 
   consul:
     container_name: "consul"
-    image: consul
+    image: consul:$CONSUL_VERSION
     restart: unless-stopped # required so that it retries until concourse-db comes up
     ports:
       - "8500:8500"
-    environment:
-      - CONSUL_UI_BETA=true
     command:
       - /bin/sh
       - -ec

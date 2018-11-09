@@ -29,7 +29,7 @@ services:
 
   concourse-web:
     container_name: "web"
-    image: concourse/concourse
+    image: concourse/concourse:${CONCOURSE_VERSION}
     restart: unless-stopped # required so that it retries until concourse-db comes up
     command:
       - web
@@ -52,13 +52,12 @@ services:
       CONCOURSE_ADD_LOCAL_USER: "${ENV_CONCOURSE_USER}:${ENV_CONCOURSE_PASSWORD}"
       CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS: "true"
       CONCOURSE_MAIN_TEAM_LOCAL_USER: "${ENV_CONCOURSE_USER}"
-      CONCOURSE_WORKER_GARDEN_NETWORK: ""
     networks:
       - concourse
 
   concourse-worker:
     container_name: "worker"
-    image: concourse/concourse
+    image: concourse/concourse:${CONCOURSE_VERSION}
     privileged: true
     depends_on:
       - concourse-web
