@@ -13,12 +13,11 @@ Spin up standalone Concourse CI environment in Docker. Optionally with Vault sec
 
 ## Quickstart
 
-1. `scripts/certs.sh`
-1. `scripts/create-machine.sh`
-1. change `ENV_CONCOURSE_URL` variable as suggested in previous step (check console output)
-1. `scripts/create-network.sh`
-1. `scripts/up-compose.sh docker-compose.yml`
-1. execute pipeline (static)
+1. `scripts/certs.sh` (generate certificates for Concourse)
+1. `scripts/create-machine.sh` (create docker-machine)
+1. `scripts/create-network.sh` (create docker overlay network)
+1. `scripts/up-compose.sh docker-compose.yml` (start Concourse CI)
+1. `scripts/pipeline_static.sh` (execute pipeline static)
 
 ### Execute pipeline (static)
 
@@ -57,18 +56,19 @@ Additional scripts:
 
 Clean everything up after quickstart case
 
-1. `scripts/certs.sh`
-1. `scripts/create-machine.sh`
-1. change `ENV_CONCOURSE_URL` variable as suggested in previous step (check console output)
-1. `scripts/create-network.sh`
-1. `scripts/compose.sh -f docker-compose-vault.yml up -d`
-1. open Vault URL `http://$(docker-machine ip concourse):8200`, then init, unseal via Web UI (for simplicity with 1 share, 1 threshold)
-1. create policy and generate token (see below)
-1. enable Vault secrets backend and write some data (see below)
-1. `scripts/down-compose.sh docker-compose-vault.yml`
-1. `scripts/compose.sh -f docker-compose-vault.yml -f docker-compose-secrets.yml up -d`
-1. unseal vault
-1. execute pipeline (Vault)
+1. `scripts/certs.sh` (generate certificates for Concourse)
+1. `scripts/create-machine.sh` (create docker-machine)
+1. `scripts/create-network.sh` (create docker overlay network)
+1. `scripts/compose.sh -f docker-compose-vault.yml -f docker-compose-secrets.yml up -d` (start Vault and Consul tiny stack altogether with Concourse CI)
+1. `scripts/unseal.sh` (unseal after restart)
+1. `scripts/config.sh` (create policy and generate token for Concourse, enable Vault secrets backend and write secrets data, see below)
+1. `scripts/pipeline_vault.sh` (execute pipeline with Vault)
+
+### Cleanup
+
+```bash
+scripts/compose.sh -f docker-compose-secrets.yml -f docker-compose-vault.yml down -v --remove-orphans
+```
 
 ### Create policy and token
 
@@ -93,12 +93,6 @@ vault kv put concourse/main/helloworld/password value=bar
 Open Concourse URL `http://$(docker-machine ip concourse):8080`, download fly binary for your platform and then check `Fly basics` below.
 
 Credentials are set in `env.config` during spin-up, user/user by default.
-
-### Cleanup
-
-```bash
-scripts/compose.sh -f docker-compose-secrets.yml -f docker-compose-vault.yml down -v --remove-orphans
-```
 
 ## Fly basics
 

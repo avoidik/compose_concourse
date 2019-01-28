@@ -26,12 +26,7 @@ if [[ -n "${IS_RUN}" ]]; then
 fi
 
 docker-machine create --driver "virtualbox" --virtualbox-boot2docker-url "$BOOT_URL" "${ENV_NAME}"
-MACHINE_IP=$(docker-machine ip "${ENV_NAME}")
 
 echo ""
 echo "Docker machine is ready"
-echo "---------------------------------------------------"
-echo "Please set the following variable in env.config to:"
-echo "export ENV_CONCOURSE_URL=http://${MACHINE_IP}:8080 "
-echo "---------------------------------------------------"
 echo ""
